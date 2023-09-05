@@ -45,10 +45,11 @@
             btnEnterPinCode = new Button();
             tbPinCode = new TextBox();
             gpbTransfer = new GroupBox();
+            cbValuta = new ComboBox();
+            btnDeposit = new Button();
             btnWithdraw = new Button();
             tbAmount = new TextBox();
-            btnDeposit = new Button();
-            cbValuta = new ComboBox();
+            btnRemove = new Button();
             gpbPinCode.SuspendLayout();
             gpbTransfer.SuspendLayout();
             SuspendLayout();
@@ -67,7 +68,7 @@
             cbCards.FormattingEnabled = true;
             cbCards.Location = new Point(25, 43);
             cbCards.Name = "cbCards";
-            cbCards.Size = new Size(121, 23);
+            cbCards.Size = new Size(200, 23);
             cbCards.TabIndex = 1;
             // 
             // btnInsertCard
@@ -78,6 +79,7 @@
             btnInsertCard.TabIndex = 2;
             btnInsertCard.Text = "Insert card";
             btnInsertCard.UseVisualStyleBackColor = true;
+            btnInsertCard.Click += btnInsertCard_Click;
             // 
             // label2
             // 
@@ -189,6 +191,7 @@
             btnEnterPinCode.TabIndex = 1;
             btnEnterPinCode.Text = "Enter";
             btnEnterPinCode.UseVisualStyleBackColor = true;
+            btnEnterPinCode.Click += btnEnterPinCode_Click;
             // 
             // tbPinCode
             // 
@@ -197,7 +200,7 @@
             tbPinCode.PasswordChar = '*';
             tbPinCode.Size = new Size(100, 23);
             tbPinCode.TabIndex = 0;
-            tbPinCode.KeyPress += tbPinCode_KeyPress;
+            tbPinCode.KeyPress += tbNumberOnly_KeyPress;
             // 
             // gpbTransfer
             // 
@@ -213,22 +216,13 @@
             gpbTransfer.Text = "Transfer";
             gpbTransfer.Visible = false;
             // 
-            // btnWithdraw
+            // cbValuta
             // 
-            btnWithdraw.Location = new Point(10, 54);
-            btnWithdraw.Name = "btnWithdraw";
-            btnWithdraw.Size = new Size(75, 23);
-            btnWithdraw.TabIndex = 1;
-            btnWithdraw.Text = "Withdraw";
-            btnWithdraw.UseVisualStyleBackColor = true;
-            // 
-            // tbAmount
-            // 
-            tbAmount.Location = new Point(10, 25);
-            tbAmount.Name = "tbAmount";
-            tbAmount.PasswordChar = '*';
-            tbAmount.Size = new Size(181, 23);
-            tbAmount.TabIndex = 0;
+            cbValuta.FormattingEnabled = true;
+            cbValuta.Location = new Point(197, 25);
+            cbValuta.Name = "cbValuta";
+            cbValuta.Size = new Size(54, 23);
+            cbValuta.TabIndex = 3;
             // 
             // btnDeposit
             // 
@@ -238,20 +232,42 @@
             btnDeposit.TabIndex = 2;
             btnDeposit.Text = "Deposit";
             btnDeposit.UseVisualStyleBackColor = true;
+            btnDeposit.Click += btnDeposit_Click;
             // 
-            // cbValuta
+            // btnWithdraw
             // 
-            cbValuta.FormattingEnabled = true;
-            cbValuta.Location = new Point(197, 25);
-            cbValuta.Name = "cbValuta";
-            cbValuta.Size = new Size(54, 23);
-            cbValuta.TabIndex = 3;
+            btnWithdraw.Location = new Point(10, 54);
+            btnWithdraw.Name = "btnWithdraw";
+            btnWithdraw.Size = new Size(75, 23);
+            btnWithdraw.TabIndex = 1;
+            btnWithdraw.Text = "Withdraw";
+            btnWithdraw.UseVisualStyleBackColor = true;
+            btnWithdraw.Click += btnWithdraw_Click;
+            // 
+            // tbAmount
+            // 
+            tbAmount.Location = new Point(10, 25);
+            tbAmount.Name = "tbAmount";
+            tbAmount.Size = new Size(181, 23);
+            tbAmount.TabIndex = 0;
+            tbAmount.KeyPress += tbNumberOnly_KeyPress;
+            // 
+            // btnRemove
+            // 
+            btnRemove.Location = new Point(150, 76);
+            btnRemove.Name = "btnRemove";
+            btnRemove.Size = new Size(75, 23);
+            btnRemove.TabIndex = 15;
+            btnRemove.Text = "Remove card";
+            btnRemove.UseVisualStyleBackColor = true;
+            btnRemove.Click += btnRemoveCard_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnRemove);
             Controls.Add(gpbTransfer);
             Controls.Add(gpbPinCode);
             Controls.Add(lblCashInHand);
@@ -269,7 +285,6 @@
             Controls.Add(label1);
             Name = "Form1";
             Text = "Form1";
-            Load += Form1_Load;
             gpbPinCode.ResumeLayout(false);
             gpbPinCode.PerformLayout();
             gpbTransfer.ResumeLayout(false);
@@ -301,5 +316,6 @@
         private Button btnDeposit;
         private Button btnWithdraw;
         private TextBox tbAmount;
+        private Button btnRemove;
     }
 }

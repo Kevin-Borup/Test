@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 
 namespace ATMLibrary.Data
 {
-    internal class LocalDataAccess : IDataAccess
+    public class LocalDataAccess : IDataAccess
     {
         private List<Account> accounts = new List<Account>();
         private List<Card> cards = new List<Card>();
+        private List<string> valutas = new List<string>();
 
         public LocalDataAccess()
         {
@@ -45,10 +46,16 @@ namespace ATMLibrary.Data
 
             cards = new List<Card>()
             {
-                new Card("a1", "a1-b1", "1234"),
-                new Card("a2", "a2-b1", "4321"),
-                new Card("a2", "a2-b2", "1111")
+                new Card("a1", "Southbank Account", "a1-b1", "Savings", "1234"),
+                new Card("a2", "Sparecase Account", "a2-b1", "Savings","4321"),
+                new Card("a2", "Sparecase Account","a2-b2", "Budget","1111")
             };
+            valutas = new List<string>()
+            {
+                "DKK",
+                "SEK",
+                "EUR"
+            };   
         }
 
         public List<Account> GetAllAccounts()

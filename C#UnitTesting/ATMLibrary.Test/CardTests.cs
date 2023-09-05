@@ -17,7 +17,7 @@ namespace ATMLibrary.Test
         //[InlineData(decimal.MaxValue, 5, decimal.MaxValue)] //MaxValue on Decimal is reaonly, therefore not possible to test like this
         public void UpdatePinCode_ShouldWork(string newPinCode)
         {
-            Card card = new Card("1", "2", "1234");
+            Card card = new Card("1", "Test", "2", "Test", "1234");
             card.UpdatePinCode(newPinCode);
 
             Assert.True(card.ValidatePinCode(newPinCode));
@@ -30,7 +30,7 @@ namespace ATMLibrary.Test
         [InlineData("000")]
         public void UpdatePinCode_TooShortShouldFail(string newPinCode)
         {
-            Card card = new Card("1", "2", "1234");
+            Card card = new Card("1", "Test", "2", "Test", "1234");
 
             var caughtException = Assert.Throws<Exception>(() => card.UpdatePinCode(newPinCode));
 
@@ -44,7 +44,7 @@ namespace ATMLibrary.Test
         [InlineData("00101")]
         public void UpdatePinCode_TooLongShouldFail(string newPinCode)
         {
-            Card card = new Card("1", "2", "1234");
+            Card card = new Card("1", "Test", "2", "Test", "1234");
 
             var caughtException = Assert.Throws<Exception>(() => card.UpdatePinCode(newPinCode));
 
@@ -58,7 +58,7 @@ namespace ATMLibrary.Test
         [InlineData("0001")]
         public void ValidatePinCode_ShouldWork(string newPinCode)
         {
-            Card card = new Card("1", "2", newPinCode);
+            Card card = new Card("1", "Test", "2", "Test", newPinCode);
 
             Assert.True(card.ValidatePinCode(newPinCode));
         }
@@ -70,7 +70,7 @@ namespace ATMLibrary.Test
         [InlineData("1")]
         public void ValidatePinCode_TooShortShouldFail(string newPinCode)
         {
-            Card card = new Card("1", "2", "1234");
+            Card card = new Card("1", "Test", "2", "Test", "1234");
 
             var caughtException = Assert.Throws<Exception>(() => card.UpdatePinCode(newPinCode));
 
@@ -84,7 +84,7 @@ namespace ATMLibrary.Test
         [InlineData("000132333331")]
         public void ValidatePinCode_TooLongShouldFail(string newPinCode)
         {
-            Card card = new Card("1", "2", "1234"); 
+            Card card = new Card("1", "Test", "2", "Test", "1234"); 
 
             var caughtException = Assert.Throws<Exception>(() => card.UpdatePinCode(newPinCode));
 

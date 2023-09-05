@@ -15,8 +15,8 @@ namespace ATMLibrary.Test
         public void InsertCard_ShouldFail()
         {
             ATM atm = new ATM(null);
-            Card card = new Card("1", "2", "1234");
-            Card card2 = new Card("1", "2", "1234");
+            Card card = new Card("1", "test", "2", "test", "1234");
+            Card card2 = new Card("1", "test", "2", "test", "1234");
 
             atm.InsertCard(card);
 
@@ -29,7 +29,7 @@ namespace ATMLibrary.Test
         public void RemoveCard_ShouldWork()
         {
             ATM atm = new ATM(null);
-            Card card = new Card("1", "2", "1234");
+            Card card = new Card("1", "test", "2", "test", "1234");
 
             atm.InsertCard(card);
             atm.RemoveCard();
@@ -57,7 +57,7 @@ namespace ATMLibrary.Test
         public void PinCode_ShouldWork(string pinCode)
         {
             ATM atm = new ATM(null);
-            Card card = new Card("1", "2", pinCode);
+            Card card = new Card("1", "test", "2", "test", pinCode);
 
             atm.InsertCard(card);
             Assert.True(atm.UnlockCard(pinCode));
@@ -80,10 +80,10 @@ namespace ATMLibrary.Test
                 atm.InsertCard(card);
                 atm.UnlockCard("1234");
 
-                decimal amountInHand = atm.WithdrawFromCard(4999);
+                decimal amountInHand = atm.WithdrawFromCard(4999, "DKK");
 
                 // If this fails, then the previous withdrawal worked.
-                var caughtException = Assert.Throws<Exception>(() => atm.WithdrawFromCard(2));
+                var caughtException = Assert.Throws<Exception>(() => atm.WithdrawFromCard(2, "DKK"));
 
                 Assert.Equal("WithdrawTooHigh", caughtException.Message);
             }
@@ -106,7 +106,7 @@ namespace ATMLibrary.Test
                 atm.InsertCard(card);
                 atm.UnlockCard("1234");
 
-                var caughtException = Assert.Throws<Exception>(() => atm.WithdrawFromCard(10002));
+                var caughtException = Assert.Throws<Exception>(() => atm.WithdrawFromCard(10002, "DKK"));
 
                 Assert.Equal("WithdrawTooHigh", caughtException.Message);
             }
@@ -129,10 +129,10 @@ namespace ATMLibrary.Test
                 atm.InsertCard(card);
                 atm.UnlockCard("1234");
 
-                atm.DepositToCard(5001);
+                atm.DepositToCard(5001, "DKK");
 
                 // If this succeeds, then the balance was increased by the previous statement.
-                atm.WithdrawFromCard(10000);
+                atm.WithdrawFromCard(10000, "DKK");
             }
         }
 
@@ -154,7 +154,7 @@ namespace ATMLibrary.Test
                 atm.UnlockCard("1234");
 
 
-                var caughtException = Assert.Throws<Exception>(() => atm.DepositToCard(-200));
+                var caughtException = Assert.Throws<Exception>(() => atm.DepositToCard(-200, "DKK"));
 
                 Assert.Equal("NegativeAmount", caughtException.Message);
             }
@@ -178,7 +178,7 @@ namespace ATMLibrary.Test
 
         private Card GetSampleCard()
         {
-            return new Card("a1", "a1-b1", "1234");
+            return new Card("a1", "Southbank Account", "a1-b1", "Savings", "1234");
         }
     }
 }
